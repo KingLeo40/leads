@@ -14,3 +14,12 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 .idea
+.dart_tool
+build
+pubspec.lock
+.packages
+
+db/*.husk
+!db/*.seed.json
+
+leads

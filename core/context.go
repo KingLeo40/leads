@@ -11,11 +11,24 @@ type context struct {
 
 var ctx context
 
-func NewContext() {
+func CreateContext() {
 	ctx = context{Submissions: husk.NewTable(Submission{}, serials.GobSerial{})}
-	return NewAPI(ctx, 10)
 }
 
 func Shutdown() {
 	ctx.Submissions.Save()
+}
+
+func GetSubmissions(page, size int) (husk.Collection, error) {
+	return ctx.Submissions.Find(page, size, husk.Everything())
+}
+
+func CreateSubmission(obj Submission) error {
+	cs := ctx.Submissions.Create(obj)
+
+	if cs.Error != nil {
+		return cs.Error
+	}
+
+	return ctx.Submissions.Save()
 }

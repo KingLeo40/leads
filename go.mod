@@ -3,9 +3,10 @@ module github.com/louisevanderlith/leads
 go 1.13
 
 require (
-	github.com/gin-gonic/gin v1.5.0
-	github.com/golang/protobuf v1.3.4 // indirect
-	github.com/louisevanderlith/husk v1.4.0
-	github.com/louisevanderlith/huskapi v1.0.3 // indirect
-	golang.org/x/sys v0.0.0-20200302150141-5c8b2ff67527 // indirect
+	github.com/gorilla/mux v1.7.4
+	github.com/louisevanderlith/droxolite v1.8.9
+	github.com/louisevanderlith/husk v1.4.3
+	github.com/louisevanderlith/kong v1.0.22
+	github.com/rs/cors v1.7.0
+	golang.org/x/crypto v0.0.0-20200604202706-70a84ac30bf9 // indirect
 )
