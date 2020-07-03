@@ -18,6 +18,6 @@ type Vehicle struct {
 	Issues string
 }
 
-func (v Vehicle) Valid() (bool, error) {
+func (v Vehicle) Valid() error {
 	return husk.ValidateStruct(&v)
 }
