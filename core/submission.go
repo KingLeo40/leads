@@ -8,6 +8,6 @@ type Submission struct {
 	Photos Photos
 }
 
-func (s Submission) Valid() (bool, error){
+func (s Submission) Valid()  error {
 	return husk.ValidateStruct(&s)
 }

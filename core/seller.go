@@ -11,6 +11,6 @@ type Seller struct {
 	Suburb string
 }
 
-func (s Seller) Valid() (bool, error){
+func (s Seller) Valid() error {
 	return husk.ValidateStruct(&s)
 }

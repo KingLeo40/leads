@@ -2,7 +2,6 @@ package core
 
 import (
 	"github.com/louisevanderlith/husk"
-	"github.com/louisevanderlith/husk/serials"
 )
 
 type context struct {
@@ -12,7 +11,7 @@ type context struct {
 var ctx context
 
 func CreateContext() {
-	ctx = context{Submissions: husk.NewTable(Submission{}, serials.GobSerial{})}
+	ctx = context{Submissions: husk.NewTable(Submission{})}
 }
 
 func Shutdown() {
@@ -24,10 +23,10 @@ func GetSubmissions(page, size int) (husk.Collection, error) {
 }
 
 func CreateSubmission(obj Submission) error {
-	cs := ctx.Submissions.Create(obj)
+	_, err := ctx.Submissions.Create(obj)
 
-	if cs.Error != nil {
-		return cs.Error
+	if err != nil {
+		return err
 	}
 
 	return ctx.Submissions.Save()
