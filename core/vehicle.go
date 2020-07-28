@@ -19,5 +19,5 @@ type Vehicle struct {
 }
 
 func (v Vehicle) Valid() error {
-	return husk.ValidateStruct(&v)
+	return husk.ValidateStruct(v)
 }

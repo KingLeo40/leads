@@ -9,5 +9,5 @@ type Submission struct {
 }
 
 func (s Submission) Valid()  error {
-	return husk.ValidateStruct(&s)
+	return husk.ValidateStruct(s)
 }

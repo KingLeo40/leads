@@ -12,5 +12,5 @@ type Seller struct {
 }
 
 func (s Seller) Valid() error {
-	return husk.ValidateStruct(&s)
+	return husk.ValidateStruct(s)
 }

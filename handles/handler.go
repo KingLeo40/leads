@@ -16,8 +16,6 @@ func SetupRoutes(scrt, secureUrl string) http.Handler {
 	create := kong.ResourceMiddleware("leads.submission.create", scrt, secureUrl, CreateSubmission)
 	r.HandleFunc("/submission", create).Methods(http.MethodPost)
 
-	//leads.submission.search
-
 	lst, err := kong.Whitelist(http.DefaultClient, secureUrl, "leads.submission.view", scrt)
 
 	if err != nil {
