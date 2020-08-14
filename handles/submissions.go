@@ -1,7 +1,7 @@
 package handles
 
 import (
-	"github.com/louisevanderlith/droxolite/context"
+	"github.com/louisevanderlith/droxolite/drx"
 	"github.com/louisevanderlith/droxolite/mix"
 	"github.com/louisevanderlith/leads/core"
 	"log"
@@ -9,8 +9,7 @@ import (
 )
 
 func GetSubmissions(w http.ResponseWriter, r *http.Request) {
-	ctx := context.New(w, r)
-	p, s := ctx.GetPageData()
+	p, s := drx.GetPageData(r)
 
 	res, err := core.GetSubmissions(p, s)
 
@@ -20,13 +19,16 @@ func GetSubmissions(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ctx.Serve(http.StatusOK, mix.JSON(res))
+	err = mix.Write(w, mix.JSON(res))
+
+	if err != nil {
+		log.Println("Serve Error", err)
+	}
 }
 
 func CreateSubmission(w http.ResponseWriter, r *http.Request) {
-	ctx := context.New(w, r)
 	obj := core.Submission{}
-	err := ctx.Body(&obj)
+	err := drx.JSONBody(r, &obj)
 
 	if err != nil {
 		log.Println(err)
@@ -42,5 +44,9 @@ func CreateSubmission(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ctx.Serve(http.StatusOK, mix.JSON("Saved"))
+	err = mix.Write(w, mix.JSON("Saved"))
+
+	if err != nil {
+		log.Println("Serve Error", err)
+	}
 }
