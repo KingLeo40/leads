@@ -9,11 +9,11 @@ import (
 
 func SetupRoutes(scrt, securityUrl, managerUrl string) http.Handler {
 	r := mux.NewRouter()
-
-	view := kong.ResourceMiddleware(http.DefaultClient, "leads.submission.view", scrt, securityUrl, managerUrl, GetSubmissions)
+	ins := kong.NewResourceInspector(http.DefaultClient, securityUrl, managerUrl)
+	view := ins.Middleware("leads.submission.view", scrt, GetSubmissions)
 	r.HandleFunc("/submission/{key:[0-9]+\\x60[0-9]+}", view).Methods(http.MethodGet)
 
-	create := kong.ResourceMiddleware(http.DefaultClient, "leads.submission.create", scrt, securityUrl, managerUrl, CreateSubmission)
+	create := ins.Middleware("leads.submission.create", scrt, CreateSubmission)
 	r.HandleFunc("/submission", create).Methods(http.MethodPost)
 
 	lst, err := kong.Whitelist(http.DefaultClient, securityUrl, "leads.submission.view", scrt)
