@@ -1,15 +1,14 @@
-import 'photos.dart';
+import 'package:mango_ui/keys.dart';
+
 import 'seller.dart';
-import 'vehicle.dart';
 
 class Submission {
   final Seller seller;
-  final Vehicle vehicle;
-  final Photos photos;
+  final Key vehicleKey;
 
-  Submission(this.seller, this.vehicle, this.photos);
+  Submission(this.seller, this.vehicleKey);
 
   Map<String, dynamic> toJson() {
-    return {"Seller": seller, "Vehicle": vehicle, "Photos": photos};
+    return {"Seller": seller, "VehicleKey": vehicleKey};
   }
 }
