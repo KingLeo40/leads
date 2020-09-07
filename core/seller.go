@@ -1,6 +1,8 @@
 package core
 
-import "github.com/louisevanderlith/husk"
+import (
+	"github.com/louisevanderlith/husk/validation"
+)
 
 type Seller struct {
 	Name      string
@@ -12,5 +14,5 @@ type Seller struct {
 }
 
 func (s Seller) Valid() error {
-	return husk.ValidateStruct(s)
+	return validation.Struct(s)
 }

@@ -2,10 +2,12 @@ package core
 
 import (
 	"github.com/louisevanderlith/husk"
+	"github.com/louisevanderlith/husk/op"
+	"github.com/louisevanderlith/husk/records"
 )
 
 type context struct {
-	Submissions husk.Tabler
+	Submissions husk.Table
 }
 
 var ctx context
@@ -18,8 +20,8 @@ func Shutdown() {
 	ctx.Submissions.Save()
 }
 
-func GetSubmissions(page, size int) (husk.Collection, error) {
-	return ctx.Submissions.Find(page, size, husk.Everything())
+func GetSubmissions(page, size int) (records.Page, error) {
+	return ctx.Submissions.Find(page, size, op.Everything())
 }
 
 func CreateSubmission(obj Submission) error {

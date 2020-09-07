@@ -1,13 +1,16 @@
 package core
 
-import "github.com/louisevanderlith/husk"
+import (
+	"github.com/louisevanderlith/husk/hsk"
+	"github.com/louisevanderlith/husk/validation"
+)
 
 type Submission struct {
 	Seller     Seller
-	VehicleKey husk.Key
-	Price	float32
+	VehicleKey hsk.Key
+	Price      float32
 }
 
 func (s Submission) Valid() error {
-	return husk.ValidateStruct(s)
+	return validation.Struct(s)
 }
