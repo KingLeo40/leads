@@ -2,21 +2,21 @@ package handles
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/louisevanderlith/kong"
+	"github.com/louisevanderlith/kong/middle"
 	"github.com/rs/cors"
 	"net/http"
 )
 
 func SetupRoutes(scrt, securityUrl, managerUrl string) http.Handler {
 	r := mux.NewRouter()
-	ins := kong.NewResourceInspector(http.DefaultClient, securityUrl, managerUrl)
+	ins := middle.NewResourceInspector(http.DefaultClient, securityUrl, managerUrl)
 	view := ins.Middleware("leads.submission.view", scrt, GetSubmissions)
 	r.HandleFunc("/submission/{key:[0-9]+\\x60[0-9]+}", view).Methods(http.MethodGet)
 
 	create := ins.Middleware("leads.submission.create", scrt, CreateSubmission)
 	r.HandleFunc("/submission", create).Methods(http.MethodPost)
 
-	lst, err := kong.Whitelist(http.DefaultClient, securityUrl, "leads.submission.view", scrt)
+	lst, err := middle.Whitelist(http.DefaultClient, securityUrl, "leads.submission.view", scrt)
 
 	if err != nil {
 		panic(err)
