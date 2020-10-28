@@ -23,3 +23,4 @@ db/*.husk
 !db/*.seed.json
 
 leads
+cmd/cmd
